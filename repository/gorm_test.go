@@ -21,7 +21,6 @@ type suiteDatabase struct {
 
 func (s *suiteDatabase) SetupSuite() {
 	db, mocking, _ := sqlmock.New()
-
 	dbGorm, _ := gorm.Open(mysql.New(mysql.Config{
 		SkipInitializeWithVersion: true,
 		Conn:                      db,
