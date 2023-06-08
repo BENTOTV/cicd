@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  api:
+    image: "agusjun28/tugascicd:latest"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - db_main
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: "mysql:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=alta3
+    networks:
+      - db_main
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
