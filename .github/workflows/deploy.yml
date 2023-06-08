@@ -1,0 +1,21 @@
+name: Deploy
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    environment: deploy
+    steps:
+    - name: pull-deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd CI-CD
+          git pull origin main
+          sudo docker-compose down 
+          sudo docker-compose up --build -d
