@@ -27,7 +27,6 @@ func (s *suiteDatabase) SetupSuite() {
 	}), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
-
 	s.mock = mocking
 	s.repository = &gormSql{
 		db: dbGorm,
