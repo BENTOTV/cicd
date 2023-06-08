@@ -17,5 +17,5 @@ jobs:
         script: |
           cd cicd
           git pull origin master
-          sudo docker-compose down 
-          sudo docker-compose up --build -d
+          sudo docker compose down 
+          sudo docker compose up --build -d
